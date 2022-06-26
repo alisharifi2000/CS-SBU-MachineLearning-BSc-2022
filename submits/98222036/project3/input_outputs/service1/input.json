@@ -11,7 +11,7 @@
       "2": 100
     }
   },
-  "confing": {
+  "config": {
     "type": "miladi",
     "time": "daily",
     "interpolation": "linear"

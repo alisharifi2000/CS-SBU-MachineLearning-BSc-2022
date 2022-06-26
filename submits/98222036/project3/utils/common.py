@@ -1,8 +1,12 @@
+from datetime import datetime
 import gzip
 from flask import make_response, json
 import pandas as pd
 import numpy as np
 import json
+from khayyam import JalaliDate, JalaliDatetime
+from datetime import datetime
+
 
 def response_message(data=None, status=200):
     if status in range(200, 400):
@@ -29,9 +33,19 @@ def convert(o):
     if pd.isna(o):
         return None
 
+def convertShamsiToMilady(shamsiDateTime):
+    shamsiDateTime = shamsiDateTime.split(sep='-')
+    shamsiDateTime = JalaliDatetime(int(shamsiDateTime[0]), int(shamsiDateTime[1]), int(shamsiDateTime[2]), int(shamsiDateTime[3])
+        , int(shamsiDateTime[4]), int(shamsiDateTime[5]), int(shamsiDateTime[6]))
+    return shamsiDateTime.todatetime()
 
-def read_json_time_series(dict_data):
+def read_json_time_series(dict_data, isShamsi):
     j_data = json.dumps(dict_data)
     data = pd.read_json(j_data)
+    if isShamsi:
+        data['time'] = data['time'].map(lambda d: convertShamsiToMilady(d))
     data.time = pd.to_datetime(data.time, unit='ms')
+
+    # print(data.info())
+    # print(data)
     return data

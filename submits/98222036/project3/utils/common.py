@@ -49,3 +49,9 @@ def read_json_time_series(dict_data, isShamsi):
     # print(data.info())
     # print(data)
     return data
+
+def read_json_normal(dict_data):
+    j_data = json.dumps(dict_data)
+    data = pd.read_json(j_data)
+
+    return data

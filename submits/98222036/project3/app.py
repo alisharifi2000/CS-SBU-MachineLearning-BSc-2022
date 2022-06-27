@@ -2,7 +2,8 @@ from flask import Flask, request
 from utils.common import response_message, read_json_time_series, read_json_normal
 from utils.interpolation_methods import interpolate
 from utils.outlier_detection_methods import outlier_detector
-from khayyam import JalaliDatetime, JalaliDate
+from utils.imbalanced_data_management_methods import balanced_data
+from khayyam import JalaliDatetime
 
 app = Flask(__name__)
 
@@ -22,13 +23,11 @@ def interpolation():
 
         if config['type'] == 'shamsi':
             result.time = result.time.map(lambda d: JalaliDatetime(d).strftime('%Y-%m-%d-%H-%M-%S-%f'))
-        # print(result)
         result = result.to_json()
-        # print(result)
 
         return response_message(dict({"data": result}))
     except Exception as e:
-        # print(e)
+        print(e)
         return response_message(dict({"data":"400 Bad Request"}), status=400)
 
 @app.route('/service2', methods=['GET', 'POST'])
@@ -37,18 +36,11 @@ def shamsiInterpolation():
         req = request.get_json()
         config = req['config']
         data = read_json_time_series(req['data'], False)
-        # print(data.time.map(lambda d: JalaliDatetime(d).strftime('%Y-%m-%d-%H-%M-%S-%f')))
 
         result = interpolate(data, config)
 
-        # for i in result.time:
-            # print(i)
-            # print(JalaliDatetime(i).localdatetimeformatascii())
-
         result.time = result.time.map(lambda d: JalaliDatetime(d).strftime('%Y-%m-%d-%H-%M-%S-%f'))
-        # print(result)
         result = result.to_json()
-        # print(result)
 
         return response_message(dict({"data": result}))
     except Exception as e:
@@ -65,7 +57,22 @@ def outlier_detection():
         result = outlier_detector(data, config)
 
         result = result.to_json()
-        # print(result)
+
+        return response_message(dict({"data": result}))
+    except Exception as e:
+        print(e)
+        return response_message(dict({"data":"400 Bad Request"}), status=400)
+
+@app.route('/service4', methods=['GET', 'POST'])
+def imbalanced_data():
+    try:
+        req = request.get_json()
+        config = req['config']
+        data = read_json_normal(req['data'])
+
+        result = balanced_data(data, config)
+
+        result = result.to_json()
 
         return response_message(dict({"data": result}))
     except Exception as e:

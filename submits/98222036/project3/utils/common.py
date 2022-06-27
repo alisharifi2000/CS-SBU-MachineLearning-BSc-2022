@@ -4,7 +4,7 @@ from flask import make_response, json
 import pandas as pd
 import numpy as np
 import json
-from khayyam import JalaliDate, JalaliDatetime
+from khayyam import JalaliDatetime
 from datetime import datetime
 
 
@@ -46,8 +46,6 @@ def read_json_time_series(dict_data, isShamsi):
         data['time'] = data['time'].map(lambda d: convertShamsiToMilady(d))
     data.time = pd.to_datetime(data.time, unit='ms')
 
-    # print(data.info())
-    # print(data)
     return data
 
 def read_json_normal(dict_data):

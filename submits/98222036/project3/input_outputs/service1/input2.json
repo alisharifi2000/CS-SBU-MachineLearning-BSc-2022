@@ -15,7 +15,7 @@
     "type": "shamsi",
     "time": "minutes",
     "frequency": 5,
-    "interpolation": "Spline",
+    "interpolation": "spline",
     "interpolation_order": 2
   }
 }

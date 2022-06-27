@@ -1,11 +1,27 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from utils.common import response_message, read_json_time_series, read_json_normal
 from utils.interpolation_methods import interpolate
 from utils.outlier_detection_methods import outlier_detector
 from utils.imbalanced_data_management_methods import balanced_data
 from khayyam import JalaliDatetime
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "SBU_ML_Project3_Services"
+    }
+)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route('/', methods=['GET', 'POST'])
 def isup():

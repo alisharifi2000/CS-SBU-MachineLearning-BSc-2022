@@ -23,3 +23,7 @@
  > https://aditya-bhattacharya.net/2020/07/20/sales-and-demand-forecast-analysis/3/
  
  > https://neptune.ai/blog/anomaly-detection-in-time-series
+ 
+# Other
+
+ > [Input examples](https://github.com/WuedK/CS-SBU-MachineLearning-BSc-2022/tree/98222036/submits/98222036/project3/input_outputs)

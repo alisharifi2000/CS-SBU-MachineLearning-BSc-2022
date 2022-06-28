@@ -1,6 +1,7 @@
 # Routes:
 
  > Interpolation: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service1
+   * polynomial interpolation of order 1 is the same as linear interpolation
  
  > Interpolation From Miladi To Shamsi: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service2
  

@@ -1,11 +1,8 @@
-FROM python:3.10-slim-buster
+FROM tiangolo/uwsgi-nginx-flask:python3.8
 
-WORKDIR /app
+COPY ./app /app
 
-COPY . /app
+# RUN tree ../
+RUN ls -l
 
 RUN pip install -r requirements.txt
-
-ENTRYPOINT ["python"]
-
-CMD ["app.py"]

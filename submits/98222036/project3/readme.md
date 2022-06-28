@@ -1,7 +1,6 @@
 # Routes:
 
  > Interpolation: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service1
-   - polynomial interpolation of order 1 is as the same as linear interpolation
  
  > Interpolation From Miladi To Shamsi: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service2
  
@@ -25,6 +24,8 @@
  
  > https://neptune.ai/blog/anomaly-detection-in-time-series
  
-# Other
+# Note
 
  > [Input examples](https://github.com/WuedK/CS-SBU-MachineLearning-BSc-2022/tree/98222036/submits/98222036/project3/input_outputs)
+
+ > polynomial interpolation of order 1 is as the same as linear interpolation

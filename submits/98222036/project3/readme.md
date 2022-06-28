@@ -26,6 +26,6 @@
  
 # Note
 
- > [Input examples](https://github.com/WuedK/CS-SBU-MachineLearning-BSc-2022/tree/98222036/submits/98222036/project3/input_outputs)
+ > [Input examples](https://github.com/WuedK/CS-SBU-MachineLearning-BSc-2022/tree/98222036/submits/98222036/project3/app/input_outputs)
 
  > polynomial interpolation of order 1 is as the same as linear interpolation

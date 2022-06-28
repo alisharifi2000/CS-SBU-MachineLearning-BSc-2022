@@ -1,12 +1,12 @@
 # Routes:
 
- > Interpolation: ['/service1'](https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service1)
+ > Interpolation: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service1
  
- > Interpolation From Miladi To Shamsi: ['/service2'](https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service2)
+ > Interpolation From Miladi To Shamsi: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service2
  
- > Outlier Detection: ['/service3'](https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service3)
+ > Outlier Detection: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service3
  
- > Imbalanced Data Management: ['/service4'](https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service4)
+ > Imbalanced Data Management: https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/service4
  
  > [API Documentation](https://sbu-ml-project-3-service-arman-sbu-ml-cloud.fandogh.cloud/swagger)
 

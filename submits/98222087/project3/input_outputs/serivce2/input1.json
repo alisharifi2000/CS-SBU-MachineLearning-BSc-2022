@@ -1,0 +1,20 @@
+{
+    "data": {
+      "time": {
+        "0": 1328227200000,
+        "1": 1328400000000,
+        "2": 1328486400000
+      },
+      "vol": {
+        "0": 20,
+        "1": 40,
+        "2": 100
+      }
+    },
+    "config": {
+      "time": "daily",
+      "interpolation": "spline",
+      "order": 2,
+      "skip_holiday": false
+    }
+  }

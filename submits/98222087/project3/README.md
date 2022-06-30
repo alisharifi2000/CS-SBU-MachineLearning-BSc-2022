@@ -12,5 +12,5 @@ https://fandogh-service-abtinmahyar.fandogh.cloud/
  
  * [Swagger - Docs](https://fandogh-service-abtinmahyar.fandogh.cloud/swagger)
 
- * [Input test cases](../98222087/input_outputs/)
+ * [Input test cases](../project3/input_outputs/)
 

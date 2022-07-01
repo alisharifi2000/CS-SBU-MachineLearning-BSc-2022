@@ -1,0 +1,279 @@
+{
+    "openapi":"3.0.0",
+    "info": {
+        "version": "0.1",
+        "title": "FinalProject3_Services"
+    },
+    "components": {
+        "schemas": {
+            "Outlier Finder": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "object",
+                                "properties":{
+                                    "0": {
+                                        "type": "any"
+                                    },
+                                    "1": {
+                                        "type": "any"
+                                    },
+                                    "2": {
+                                        "type": "any"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "feature": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "time_series":{
+                                "type": "should be false",
+                                "format":"boolean",
+                                "required": true
+                            },
+                            "z":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "threshold": {
+                                        "type": "integer",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "lof":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_neighbors": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "metric": {
+                                        "type": "any metric accepted by sklearn such as manhattan",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "isolation":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_estimators": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "contamination": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "svm":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "kernel": {
+                                        "type": "one of: linear/rbf",
+                                        "required":false
+                                    },
+                                    "max_iter": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "tol": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    },
+                                    "nu": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Outlier Finder Time Series": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "type": "object",
+                                    "properties": {
+                                    "0": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "1": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "2": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "vol": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "time_series":{
+                                "type": "should be true",
+                                "format":"boolean",
+                                "required": true
+                            },
+                            "isolation":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_estimators": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "contamination": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Imbalanced": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "feature1": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "feature2": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "...": {
+                                "type":" "
+                            },
+                            "class": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "0 or 1"
+                                    },
+                                    "1": {
+                                        "type": "0 or 1"
+                                    },
+                                    "2": {
+                                        "type": "0 or 1"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "method":{
+                                "type": "one of: oversampling/undersampling/SMOTE",
+                                "required": true
+                            },
+                            "major_class":{
+                                "type": "0 or 1",
+                                "required": false
+                            },
+                            "minor_class":{
+                                "type": "0 or 1",
+                                "required": false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

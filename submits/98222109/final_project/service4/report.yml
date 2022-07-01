@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  description: "this service is for balancing imbalance data. your data must have id section for you can identify your data and your data must have feature for each data and in class option of data you must say the class of each data with numbers 0 or 1 in config section you have two option 'major_class' and 'minor_class' for 'major_class' you can set 0 or 1 for your major class and for 'minor_class' you can set 0 or 1 for your minor class. in the end we have method option in config section this option can be 'SMOTE', 'RANDOM_OVERSAMPLING', 'RANDOM_UNDERSAMPLING'"
+  version: "1.0.0"
+  title: "service4 API"
+paths:
+  /:
+    post:
+      tags:
+      - "is API active?"
+      summary: "just for seeing our API is active or not"
+      description: ""
+      responses:
+        "200":
+          description: "API is active and is ready to use"
+        "405":
+          description: "API is not active"
+  /service4:
+    post:
+      tags:
+        - "service4"
+      summary: "balancing imbalance data"
+      description: "id must be integer\n
+                    you can have numerous features but you must specify them in different sections\n
+                    this service just accept two class with number 0 and 1 label\n
+                    method in config can be 'SMOTE', 'RANDOM_OVERSAMPLING', 'RANDOM_UNDERSAMPLING'"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "input json"
+          required: true
+          schema:
+            $ref: "#/definitions/service4"
+      responses:
+        "200":
+          description: "congratulations your output json dont have config and in base of your algorithm your data can have more element or it can have less element"
+        "405":
+          description: "Something is wrong. please notice that in smote method for each class you must have at least two element"
+definitions:
+  service4:
+    example:
+      "{
+        \"data\": {
+          \"id\": {
+            \"0\": 1,
+            \"1\": 2,
+            \"2\": 3,
+            \"3\": 4,
+            \"4\": 5,
+            \"5\": 6
+          },
+          \"feature1\": {
+            \"0\": 50,
+            \"1\": 12,
+            \"2\": 50,
+            \"3\": 500,
+            \"4\": 60,
+            \"5\": 12
+          },
+          \"class\": {
+            \"0\": 1,
+            \"1\": 1,
+            \"2\": 1,
+            \"3\": 1,
+            \"4\": 0,
+            \"5\": 0
+          }
+        },
+        \"config\": {
+          \"major_class\": 1,
+          \"minor_class\": 0,
+          \"method\": \"SMOTE\"
+        }
+      }"

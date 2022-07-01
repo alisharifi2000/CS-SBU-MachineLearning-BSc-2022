@@ -1,0 +1,6 @@
+kind: ExternalService
+name: fandogh-service
+spec:
+ image: fandoghi-service:0.1
+ port: 3000  
+ static_path: static

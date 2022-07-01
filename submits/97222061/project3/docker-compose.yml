@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  ml:
+    build:
+      context: .
+    image: ${IMAGE_TAG:-machine-learning-image-tag}
+    environment:
+      - GUNICORN_PORT=8000
+      - GUNICORN_LOG_LEVEL="info"
+      - DJANGO_DEBUG="false"
+    ports:
+      - "8888:8000"

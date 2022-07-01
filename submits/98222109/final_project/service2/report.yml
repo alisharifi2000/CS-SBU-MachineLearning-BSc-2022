@@ -1,0 +1,68 @@
+swagger: "2.0"
+info:
+  description: "this service is for interpolating in time series,time in json can be 'daily', 'monthly', 'hourly', 'minutes' and 'seconds' and in the input json interpolation method can be 'linear' or 'polynomial' or 'spline' and skip holiday can be true or false and skip holiday option just skip fridays and thursdays time field in output is in shamsi format in config section we have tool option this option can be 'Pandas' or 'Dask' if you select Pandas program will run with pandas and in Dask mode program use Dask package"
+  version: "1.0.0"
+  title: "service2 API"
+paths:
+  /:
+    post:
+      tags:
+      - "is API active?"
+      summary: "just for seeing our API is active or not"
+      description: ""
+      responses:
+        "200":
+          description: "API is active and is ready to use"
+        "405":
+          description: "API is not active"
+  /service2:
+    post:
+      tags:
+        - "service2"
+      summary: "interplate in time series"
+      description: "time most be one of 'daily', 'monthly', 'hourly', 'seconds', 'minutes'\n
+                    skip holiday option just skip fridays and thursdays this option can be true or false\n
+                    interpolation most be one of 'linear', 'polynomial', 'spline'\n
+                    times must be in integer(standard) foramt\n
+                    tool can be 'Pandas' or 'Dask'"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "input json"
+          required: true
+          schema:
+            $ref: "#/definitions/service2"
+      responses:
+        "200":
+          description: "congratulations in output json we dont ave config section and you just have data section with time and vol options times in output json are shamsi"
+        "405":
+          description: "Something is wrong"
+definitions:
+  service2:
+    example:
+      "{
+           \"data\": {
+             \"time\": {
+               \"0\": 1328227200000,
+               \"1\": 1328400000000,
+               \"2\": 1328486400000
+             },
+             \"vol\": {
+               \"0\": 20,
+               \"1\": 40,
+               \"2\": 100
+             }
+           },
+           \"config\": {
+             \"time\": \"daily\",
+             \"interpolation\": \"linear\",
+             \"skip_holiday\": false,
+             \"tool\":\"Dask\"
+           }
+         }"

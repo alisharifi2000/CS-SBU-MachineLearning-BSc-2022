@@ -8,4 +8,4 @@ http://finalproject-cheshmi.fandogh.cloud/
  > 
  > Imbalanced Data Handler: https://finalproject-cheshmi.fandogh.cloud/service4
  > 
- > [API Documentation](http://finalproject-cheshmi.fandogh.cloud/swagger/)
+ > [Swagger](http://finalproject-cheshmi.fandogh.cloud/swagger/)

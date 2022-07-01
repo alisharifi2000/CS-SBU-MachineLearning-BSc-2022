@@ -1,0 +1,23 @@
+post:
+  tags:
+    - "service3"
+  summary: "It detects outliers."
+  description: "It takes a time series or any other data and two lists of true/false values. These lists show the outliers."
+  operationId: "service3"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    - name: "body"
+      in: "body"
+      required: true
+      schema:
+        $ref: "./definitions.yml#/Service3Request"
+  responses:
+    "200":
+      description: "Detected outliers successfully"
+      schema:
+        $ref: "./definitions.yml#/Service3Response"
+    "405":
+      description: "Invalid input"

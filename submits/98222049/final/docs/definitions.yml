@@ -1,0 +1,297 @@
+Time:
+  type:
+    - "string"
+    - "timestamp"
+  format: "datetime"
+Vol:
+  type: "integer"
+  format: "percent"
+ID:
+  type: "integer"
+  format: "increase"
+Feature:
+  type:
+    - "integer"
+    - "string"
+
+Service1Request:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        time:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Time"
+          example:
+            0: 1328227200000
+            1: 1328400000000
+            2: 1328486400000
+        vol:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Vol"
+          example:
+            0: 20
+            1: 40
+            2: 100
+    config:
+      type: "object"
+      properties:
+        time:
+          type: "string"
+          enum: ["monthly", "daily", "hourly", "minutely"]
+        interpolation:
+          type: "string"
+          enum: ["linear", "spline", "polynomial"]
+        order:
+          type: "integer"
+          example: 0
+        skip_holidays:
+          type: "boolean"
+          default: false
+
+Service1Response:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        time:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Time"
+          example:
+            0: 1577836800000
+            1: 1577923200000
+            2: 1578009600000
+            3: 1578096000000
+        vol:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Vol"
+          example:
+            0: 20
+            1: 40
+            2: 70
+            3: 100
+Service2Request:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        time:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Time"
+          example:
+            0: 1577836800000
+            1: 1577923200000
+            2: 1578096000000
+        vol:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Vol"
+          example:
+            0: 20
+            1: 40
+            2: 100
+    config:
+      type: "object"
+      properties:
+        type:
+          type: "string"
+          enum: ["shamsi", "miladi"]
+        time:
+          type: "string"
+          enum: ["monthly", "daily", "hourly", "minutely"]
+        interpolation:
+          type: "string"
+          enum: ["linear", "spline", "polynomial"]
+        order:
+          type: "integer"
+          example: 0
+
+Service2Response:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        time:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Time"
+          example:
+            0: "1390-11-14"
+            1: "1390-11-15"
+            2: "1390-11-16"
+            3: "1390-11-17"
+        vol:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Vol"
+          example:
+            0: 20
+            1: 40
+            2: 70
+            3: 100
+Service3Request:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        id:
+          type: "object"
+          additionalProperties:
+            $ref: "#/ID"
+          example:
+            0: 1
+            1: 2
+            2: 3
+            3: 4
+            4: 5
+            5: 6
+        feature:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Feature"
+          example:
+            0: 100
+            1: 20
+            2: 35
+            3: 67
+            4: 89
+            5: 90
+    config:
+      type: "object"
+      properties:
+        time_series:
+          type: "boolean"
+          default: false
+
+Service3Response:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        id:
+          type: "object"
+          additionalProperties:
+            $ref: "#/ID"
+          example:
+            0: 1
+            1: 2
+            2: 3
+            3: 4
+            4: 5
+            5: 6
+        method1:
+          type: "object"
+          additionalProperties:
+            type: "boolean"
+          example:
+            0: false
+            1: false
+            2: false
+            3: false
+            4: false
+            5: false
+        method2:
+          type: "object"
+          additionalProperties:
+            type: "boolean"
+          example:
+            0: true
+            1: false
+            2: false
+            3: true
+            4: true
+            5: false
+Service4Request:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        id:
+          type: "object"
+          additionalProperties:
+            $ref: "#/ID"
+          example:
+            0: 1
+            1: 2
+            2: 3
+            3: 4
+            4: 5
+            5: 6
+        feature1:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Feature"
+          example:
+            0: 50
+            1: 12
+            2: 50
+            3: 500
+            4: 60
+            5: 12
+        class:
+          type: "object"
+          additionalProperties:
+            type: "binary"
+          example:
+            0: 1
+            1: 1
+            2: 1
+            3: 1
+            4: 1
+            5: 0
+    config:
+      type: "object"
+      properties:
+        major_class:
+          type: "binary"
+          example: 1
+        minor_class:
+          type: "binary"
+          example: 0
+        method:
+          type: "string"
+          enum: ["SMOTE", "oversampling", "unersampling"]
+          example: :unersampling
+
+Service4Response:
+  type: "object"
+  properties:
+    data:
+      type: "object"
+      properties:
+        id:
+          type: "object"
+          additionalProperties:
+            $ref: "#/ID"
+          example:
+            0: 6
+            1: 4
+            2: 2
+        feature1:
+          type: "object"
+          additionalProperties:
+            $ref: "#/Feature"
+          example:
+            0: 12
+            1: 500
+            2: 12
+        class:
+          type: "object"
+          additionalProperties:
+            type: "binary"
+          example:
+            0: 0
+            1: 1
+            2: 1

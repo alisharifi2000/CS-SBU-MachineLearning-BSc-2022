@@ -1,0 +1,23 @@
+post:
+  tags:
+    - "service4"
+  summary: "It makes the dataset balanced."
+  description: "It takes a imbalanced dataset and returns a balanced one. It can handle more than one feature."
+  operationId: "service4"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    - name: "body"
+      in: "body"
+      required: true
+      schema:
+        $ref: "./definitions.yml#/Service4Request"
+  responses:
+    "200":
+      description: "Detected outliers successfully"
+      schema:
+        $ref: "./definitions.yml#/Service4Response"
+    "405":
+      description: "Invalid input"

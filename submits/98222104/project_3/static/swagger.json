@@ -1,0 +1,488 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Final Project API (by Alireza Nejati)",
+    "description": "This is the Machine Learning Final Project. Implemention of four services includes Interpolation, Outlier Detection and Imblance Data Management using Flask API and Fandogh Cloud Platform.",
+    "version": "1.0",
+    "contact": {
+      "email": "a.nejati1379@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://fandogh-service-alirezan35.fandogh.cloud"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Machine Learning Final Project",
+      "description": "Everything about services"
+    },
+    {
+      "name": "1st Service",
+      "description": "Interpolation"
+    },
+    {
+      "name": "2nd Service",
+      "description": "Interpolation"
+    },
+    {
+      "name": "3rd Service",
+      "description": "Outlier Detection"
+    },
+    {
+      "name": "4th Service",
+      "description": "Imbalance Data Management"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Machine Learning Final Project"
+        ],
+        "summary": "Check for API connection",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "API is active"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service1": {
+      "post": {
+        "tags": [
+          "Machine Learning Final Project",
+          "1st Service"
+        ],
+        "summary": "Interpolate daily and monthly Jalali and Gregorian date",
+        "description": "Extra parts implemented are swagger and PAAS(fandogh).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/service1-request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/service1-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service2": {
+      "post": {
+        "tags": [
+          "Machine Learning Final Project",
+          "2nd Service"
+        ],
+        "summary": "Interpolate Gregorian date and convert to Jalali date.",
+        "description": "Extra parts implemented are swagger, PAAS(fandogh) and skip holidays",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/service2-request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/service2-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service3": {
+      "post": {
+        "tags": [
+          "Machine Learning Final Project",
+          "3rd Service"
+        ],
+        "summary": "Detect outliers data in time-series and non-time-series datasets. For time-series we use z-score and prophet and for non-time-series we use z-score and IQR methods",
+        "description": "Extra parts implemented are swagger and PAAS(fandogh).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/service3-request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/service3-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service4": {
+      "post": {
+        "tags": [
+          "Machine Learning Final Project",
+          "4th Service"
+        ],
+        "summary": "handle imbalanced dataset using oversampling and undersampling methods",
+        "description": "Extra parts implemented are swagger, PAAS(fandogh) and one more method(NearMiss).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/service4-request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/service4-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "gregorian-time": {
+        "type": "integer",
+        "description": "unix format ms",
+        "example": 1577836800000
+      },
+      "jalali-time": {
+        "type": "string",
+        "example": "1398-1-15"
+      },
+      "vol": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "example": 20
+        }
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "miladi",
+          "shamsi"
+        ]
+      },
+      "interpolation": {
+        "type": "string",
+        "enum": [
+          "linear"
+        ]
+      },
+      "time_type": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "monthly"
+        ]
+      },
+      "config1": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/type"
+          },
+          "time": {
+            "$ref": "#/components/schemas/time_type"
+          },
+          "interpolation": {
+            "$ref": "#/components/schemas/interpolation"
+          }
+        }
+      },
+      "config2": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "$ref": "#/components/schemas/time_type"
+          },
+          "interpolation": {
+            "$ref": "#/components/schemas/interpolation"
+          },
+          "skip_holiday": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "service1-request": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "time": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/gregorian-time"
+                }
+              },
+              "vol": {
+                "$ref": "#/components/schemas/vol"
+              }
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/config1"
+          }
+        }
+      },
+      "service1-response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "time": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/gregorian-time"
+                }
+              },
+              "vol": {
+                "$ref": "#/components/schemas/vol"
+              }
+            }
+          }
+        }
+      },
+      "service2-request": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "time": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/gregorian-time"
+                }
+              },
+              "vol": {
+                "$ref": "#/components/schemas/vol"
+              }
+            }
+          },
+          "config": {
+            "$ref": "#/components/schemas/config2"
+          }
+        }
+      },
+      "service2-response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "time": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/jalali-time"
+                }
+              },
+              "vol": {
+                "$ref": "#/components/schemas/vol"
+              }
+            }
+          }
+        }
+      },
+      "service3-request": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "properties": {
+              "id": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              "feature": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 30
+                }
+              }
+            }
+          },
+          "config": {
+            "properties": {
+              "time_series": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          }
+        }
+      },
+      "service3-response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "properties": {
+              "id": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              "method1": {
+                "type": "array",
+                "items": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "method2": {
+                "type": "array",
+                "items": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "service4-request": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "properties": {
+              "id": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              "feature1": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 30
+                }
+              },
+              "class": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                }
+              }
+            }
+          },
+          "config": {
+            "properties": {
+              "major_class": {
+                "type": "integer",
+                "example": 1
+              },
+              "minor_class": {
+                "type": "integer",
+                "example": 0
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "SMOTE",
+                  "UnderSampling",
+                  "OverSampling",
+                  "NearMiss"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "service4-response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "properties": {
+              "id": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              "feature1": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "example": 30
+                }
+              },
+              "class": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

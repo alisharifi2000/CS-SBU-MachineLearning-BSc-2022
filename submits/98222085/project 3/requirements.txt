@@ -1,0 +1,7 @@
+pandas~=1.4.3
+numpy~=1.23.0
+Flask~=2.1.2
+Khayyam~=3.0.17
+statsmodels~=0.13.2
+imblearn~=0.0
+scikit-learn~=1.1.1

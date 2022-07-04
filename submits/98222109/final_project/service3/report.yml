@@ -1,0 +1,69 @@
+swagger: "2.0"
+info:
+  description: "this service is for detecting anomaly data, we have two option. if your data is not time series your data must have id and feature section if your data is time series your data must have time and feature section time section must be in integer(standard) format and in config section time_series option can be true or false if your data is time series you must set the time_series option in true mode if your data is in common mode you must set time_series option in false mode"
+  version: "1.0.0"
+  title: "service3 API"
+paths:
+  /:
+    post:
+      tags:
+      - "is API active?"
+      summary: "just for seeing our API is active or not"
+      description: ""
+      responses:
+        "200":
+          description: "API is active and is ready to use"
+        "405":
+          description: "API is not active"
+  /service3:
+    post:
+      tags:
+        - "service3"
+      summary: "detecting anomaly data"
+      description: "times must be in integer(standard) format\n
+                    if time_series option in config section is true your data must have time and feature subsection\n
+                    if time_series option in config section is false your data must have id and feature subsection"
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "input json"
+          required: true
+          schema:
+            $ref: "#/definitions/service3"
+      responses:
+        "200":
+          description: "congratulations your output json dont have config section and your data section have id option for identifying each data. in data section you have method1 option if isolation forest detect the data with id 1 is anomaly it return true in second row of method1 option and if data with id 1 is normal we have false in second row of method1. this approach is exist for method2 option and method2 option use LOF algorithm"
+        "405":
+          description: "Something is wrong"
+definitions:
+  service3:
+    example:
+      "{
+        \"data\": {
+          \"id\": {
+            \"0\": 1,
+            \"1\": 2,
+            \"2\": 3,
+            \"3\": 4,
+            \"4\": 5,
+            \"5\": 6
+          },
+          \"feature\": {
+            \"0\": 100,
+            \"1\": 20,
+            \"2\": 35,
+            \"3\": 67,
+            \"4\": 89,
+            \"5\": 90
+          }
+        },
+        \"config\": {
+          \"time_series\": false
+        }
+      }"

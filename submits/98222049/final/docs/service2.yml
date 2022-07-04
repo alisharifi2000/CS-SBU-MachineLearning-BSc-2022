@@ -1,0 +1,23 @@
+post:
+  tags:
+    - "service2"
+  summary: "It interpolates and converts time series."
+  description: "It takes a time series in miladi format and converts it to a interpolated shamsi time series. Time can be monthly/daily/hourly/minutely and interpolation can be linear/polynomial/spline."
+  operationId: "service2"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    - name: "body"
+      in: "body"
+      required: true
+      schema:
+        $ref: "./definitions.yml#/Service2Request"
+  responses:
+    "200":
+      description: "Interpolated successfully"
+      schema:
+        $ref: "./definitions.yml#/Service2Response"
+    "405":
+      description: "Invalid input"

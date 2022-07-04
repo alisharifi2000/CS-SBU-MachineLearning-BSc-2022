@@ -1,0 +1,28 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Final Project"
+  contact:
+    url: "https://github.com/mahdieh-sjp"
+host: "localhost:5000"
+basePath: "/v1"
+paths:
+  /:
+    get:
+      tags:
+        - "landing page"
+      summary: "Repsents a sentence."
+      operationId: "LandingPage"
+      produces:
+        - "application/xml"
+      responses:
+        "200":
+          description: "successful operation"
+  /service1:
+    $ref: "./service1.yml"
+  /service2:
+    $ref: "./service2.yml"
+  /service3:
+    $ref: "./service3.yml"
+  /service4:
+    $ref: "./service4.yml"

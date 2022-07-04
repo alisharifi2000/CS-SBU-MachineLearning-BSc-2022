@@ -1,0 +1,23 @@
+post:
+  tags:
+    - "service1"
+  summary: "It interpolates time series."
+  description: "It takes a time series and returns an interpolated time series. Type can be shamsi/miladi, time can be monthly/daily/hourly/minutely, and interpolation can be linear/polynomial/spline."
+  operationId: "service1"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    - name: "body"
+      in: "body"
+      required: true
+      schema:
+        $ref: "./definitions.yml#/Service1Request"
+  responses:
+    "200":
+      description: "Interpolated successfully"
+      schema:
+        $ref: "./definitions.yml#/Service1Response"
+    "405":
+      description: "Invalid input"

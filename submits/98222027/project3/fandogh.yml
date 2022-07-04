@@ -1,0 +1,6 @@
+kind: ExternalService
+name: finalproject
+spec:
+ image: final_project:2
+ port: 80  
+ static_path: static

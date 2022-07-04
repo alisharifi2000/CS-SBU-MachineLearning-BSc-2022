@@ -1,0 +1,357 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+      "description": "Machine Learning Final Project, by Saeid Cheshmi."
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "ML Final Project",
+        "description": "Swagger for services"
+      }
+    ],
+    "paths": {
+    "/" :{
+            "get": {
+                "tags": [
+                  "ML Final Project"
+                ],
+                "summary": "API is active",
+                "responses": {
+                  "200": {
+                    "description": "OK"
+              
+                }
+              }
+        }
+      },
+      "/service1": {
+        "post": {
+          "tags": [
+            "ML Final Project"
+          ],
+          "summary": "Time-series interpolation",
+          "requestBody": {
+            "description": "Interpolate Jalali and Gregorian date",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/service1"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/id"
+              }
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/service2": {
+        "post": {
+            "tags": [
+              "ML Final Project"
+            ],
+            "summary": "Date convertor and interpolation",
+            "requestBody": {
+              "description": "Recieving a Gregorian date interpolate it and convert to Jalali date.",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/service2"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "201": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              },
+              "400": {
+                "description": "Failed. Bad post data."
+              }
+            }
+          }
+      },
+      "/service3": {
+        "post": {
+            "tags": [
+              "ML Final Project"
+            ],
+            "summary": "Outlier detection",
+            "requestBody": {
+              "description": "Detecting outliers in time-series and normal datasets. \n\n For normal datasets: \n - Z-score method \n - IQR method  \n - Isolation forest \n\n For time-series datasets: \n - Isolation forest  \n - Prophet  ",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/service3"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "201": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              },
+              "400": {
+                "description": "Failed. Bad post data."
+              }
+            }
+          }
+      },
+      "/service4": {
+        "post": {
+            "tags": [
+              "ML Final Project"
+            ],
+            "summary": "Imbalanced dataset handler",
+            "requestBody": {
+              "description": "Preforming oversampling and undersampling methods \n - undersampling \n - oversampling \n - SMOTE \n - Near Miss  ",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/service4"
+                  }
+                }
+              }
+            },
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "201": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/components/schemas/id"
+                }
+              },
+              "400": {
+                "description": "Failed. Bad post data."
+              }
+            }
+          }
+      }
+    },
+    "components": {
+      "schemas": {
+        "id": {
+          "properties": {
+            "uuid": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "time" : {
+      "type": "object",
+      "description": "index:time",
+      "example": "index:time"
+      
+      },
+      "vol" : {
+        "type": "object",
+        "description": "index:vol",
+        "example": "index:vol"
+      },
+      "type":{
+        "type": "string",
+        "enum": [
+          "miladi",
+          "shamsi"
+        ]
+      },
+      "interpolation":{
+        "type": "integer",
+        "enum": [
+          "linear",
+          "polynomial",
+          "spline"
+        ]
+      },
+      "order": {
+        "type": "integer",
+        "format": "int64",
+        "example": 1
+      },
+      "time_type":{
+        "type": "string",
+        "enum": [
+            "daily",
+            "monthly"
+          ]
+      },
+      "config":{
+        "type":"object",
+        "properties": {
+          "type":{
+            "$ref": "#/definitions/type"
+          },
+          "time":{
+            "$ref": "#/definitions/time_type"
+          },
+          "interpolation":{
+            "$ref": "#/definitions/interpolation"
+          },
+          "order":{
+            "$ref": "#/definitions/order"
+          }
+        }
+      },
+      "config2":{
+        "type":"object",
+        "properties":{
+          "time":{
+            "$ref": "#/definitions/time_type"
+          },
+          "interpolation":{
+            "$ref": "#/definitions/interpolation"
+          },
+          "order":{
+            "$ref": "#/definitions/order"
+          },
+          "skip_holiday":{
+            "type":"boolean",
+            "example": false
+          }
+        }
+      },
+      "data":{
+        "type":"object",
+        "properties":{
+          "time":{
+            "$ref": "#/definitions/time"
+          },
+          "vol":{
+            "$ref": "#/definitions/vol"
+          }
+        }
+      },
+      "service1":{
+        "type":"object",
+        "properties":{
+          "data":{
+            "$ref": "#/definitions/data"
+          },
+          "config":{
+            "$ref": "#/definitions/config"
+          }
+
+        }
+      },
+      "service2":{
+        "type":"object",
+        "properties":{
+          "data":{
+            "$ref": "#/definitions/data"
+          },
+          "config":{
+            "$ref": "#/definitions/config2"
+          }
+
+      }
+    },
+    "service3":{
+      "type":"object",
+        "properties":{
+          "data":{
+            "properties":{
+              "id":{
+                "type": "object",
+                "description": "index:id",
+                "example": "index:id"
+              },
+              "feature":{
+                "type": "object",
+                "description": "index: feature value",
+                "example": "index: feature value"
+              }
+            }
+          },
+          "config":{
+            "properties":{
+              "time_series":{
+                "type":"boolean",
+                "example":false
+              }
+
+            }
+          }
+        }
+    },
+    "service4":{
+      "type":"object",
+        "properties":{
+          "data":{
+            "properties":{
+              "id":{
+                "type": "object",
+                "description": "index:id",
+                "example": "index:id"
+              },
+              "feature1":{
+                "type": "object",
+                "description": "index: feature value",
+                "example": "index: feature value"
+              },
+              "class":{
+                "type": "object",
+                "description": "index: class",
+                "example": "index: class"
+              }
+            }
+          },
+          "config":{
+            "properties":{
+              "major_class":{
+                "type":"integer",
+                "example":1
+              },
+              "minor_class":{
+                "type":"integer",
+                "example":0
+              },
+              "method":{
+                "type":"string",
+                "enum":["SMOTE","undersampling","oversampling","Near Miss"],
+                "example":"SMOTE"
+              }
+              }
+
+            }
+          }
+    }
+    }
+    
+}

@@ -1,0 +1,407 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Final project machine learning course, Shahid beheshti university, Abtin Mahyar. \n Formats of request and descriptions of each services are described in this page. sample test cases for each service and their responses are availabe in \"input_output\" folder.",
+    "version": "1.0.0",
+    "title": "Final Project ML"
+  },
+  "tags": [
+    {
+      "name": "service1",
+      "description": ""
+    },
+    {
+      "name": "service2",
+      "description": ""
+    },
+    {
+      "name": "service3",
+      "description": ""
+    },
+    {
+      "name": "service4",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/service1": {
+      "post": {
+        "tags": [
+          "service1"
+        ],
+        "summary": "Time series interpolation service in miladi and shamsi format",
+        "description": "Performing linear, polynomial, and spline interpolation methods on daily, monthly, hour, minute, and seconds time series data. For miladi format I used the pre-defined function in pandas and for shamsi I convert it to miladi and then performed the interpolation and again convert it to shamsi format. make sure to provide an appropriate order in request's config parameter when using spline or polynomial method. ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "service1 object request format that needs to be send to the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/service1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Interpolated dataset"
+          }
+        }
+      }
+    },
+    "/service2": {
+      "post": {
+        "tags": [
+          "service2"
+        ],
+        "summary": "Time conversion from miladi to shamsi and interpolation service",
+        "description": "Performing linear, polynomial, and spline interpolation methods on daily, monthly, hour, minute, and seconds time series data in miladi format and convert it to shamsi, with skip holiday ability. make sure to provide an appropriate order in request's config parameter when using spline or polynomial method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "service2 object request format that needs to be send to the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/service2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Interpolated dataset in shamsi format"
+          }
+        }
+      }
+    },
+    "/service3": {
+      "post": {
+        "tags": [
+          "service3"
+        ],
+        "summary": "Outlier detection",
+        "description": "Performing outlier detection methods on the given dataset. In the response message, indexes with true values are outliers. \n For regular dataset: \n - isolation forest \n - local outlier factor \n - IQR \n - Hampel method \n - z-score based method \n - Minimum Covariance Determinant \n - One class SVM \n\n For time series datasets (it is better to use seasonal dataset like sample test case that are provided in the \"input_output\" folder for this service since models are analysing seasonal trends in the data.):  \n - seasonl trend decomposition as the first method \n - seasonl ESD as the second method",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "service3 object request format that needs to be send to the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/service3"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - dataset contains indexes and a boolean column which specifies a index is outlier or not"
+          }
+        }
+      }
+    },
+    "/service4": {
+      "post": {
+        "tags": [
+          "service4"
+        ],
+        "summary": "imbalance data handler",
+        "description": "Performing oversampling, and under sampling methods on the given dataset in order to tackle imbalance data issue. Method which used are: \n - Near miss -> key: NEARMISS \n - Random over sampler -> key: OVERSAMPLING \n - SMOTE -> key: SMOTE \n - Random under sampling -> key: UNDERSAMPLING \n - Borderline SMOTE -> key: BORDERLINESMOTE \n - SVMSMOTE -> key: SVMSMOTE \n - ADASYN -> key: ADASYN",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "service4 object request format that needs to be send to the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/service4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - New dataset with balanced data"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dataservice1": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer",
+              "example": "(int) 1640995200000 - unix format /(string) 1390-1-1 - shamsi"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer",
+              "example": "(int) 1640995200000 - unix format /(string) 1390-1-1 - shamsi"
+            }
+          }
+        },
+        "vol": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        }
+      }
+    },
+    "dataservice2": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer",
+              "example": "(int) 1640995200000 - unix format"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer",
+              "example": "(int) 1640995200000 - unix format"
+            }
+          }
+        },
+        "vol": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        }
+      }
+    },
+    "dataservice3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        },
+        "vol": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        }
+      }
+    },
+    "dataservice4": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        },
+        "feature1": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        },
+        "class": {
+          "type": "object",
+          "properties": {
+            "0": {
+              "type": "integer",
+              "format": "integer"
+            },
+            "1": {
+              "type": "integer",
+              "format": "integer"
+            }
+          }
+        }
+      }
+    },
+    "service1": {
+      "type": "object",
+      "required": [
+        "data",
+        "config"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/dataservice1"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "format": "string",
+              "example": "miladi / shamsi"
+            },
+            "time": {
+              "format": "string",
+              "example": "daily / monthly / hour / min / sec"
+            },
+            "interpolation": {
+              "format": "string",
+              "example": "linear / spline / polynomial"
+            },
+            "order": {
+              "format": "integer",
+              "example": 2
+            }
+          }
+        }
+      }
+    },
+    "service2": {
+      "type": "object",
+      "required": [
+        "data",
+        "config"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/dataservice2"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "time": {
+              "format": "string",
+              "example": "daily / monthly / hour / min / sec"
+            },
+            "interpolation": {
+              "format": "string",
+              "example": "linear / spline / polynomial"
+            },
+            "skip_holiday": {
+              "format": "boolean",
+              "example": "false"
+            }
+          }
+        }
+      }
+    },
+    "service3": {
+      "type": "object",
+      "required": [
+        "data",
+        "config"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/dataservice3"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "time-series": {
+              "format": "boolean",
+              "example": "false"
+            }
+          }
+        }
+      }
+    },
+    "service4": {
+      "type": "object",
+      "required": [
+        "data",
+        "config"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/dataservice4"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "major_class": {
+              "format": "integer",
+              "example": 1
+            },
+            "minor_class": {
+              "format": "integer",
+              "example": 0
+            },
+            "method": {
+              "format": "string",
+              "example": "SMOTE"
+            }
+          }
+        }
+      }
+    }
+  }
+}

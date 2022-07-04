@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "f8884179-8406-44f6-bea7-21883cb11361",
+		"name": "ML Final Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11318953"
+	},
+	"item": [
+		{
+			"name": "Service 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n  \"data\": {\n    \"time\": {\n      \"0\": \"2022-01-01 00:00:00\",\n      \"1\": \"2022-01-01 00:05:00\",\n      \"2\": \"2022-01-01 00:10:00\",\n      \"3\": \"2022-01-01 00:15:00\"\n    },\n    \"vol\": {\n      \"0\": 20,\n      \"1\": 40,\n      \"2\": 100,\n      \"3\": 120\n    }\n  },\n  \"config\": {\n    \"type\": \"gregorian\",\n    \"time\": \"minutely\",\n    \"interpolation\": \"polynomial\",\n    \"order\": 2\n  }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fandogh-service-mhrzn1.fandogh.cloud/service1",
+					"protocol": "https",
+					"host": [
+						"fandogh-service-mhrzn1",
+						"fandogh",
+						"cloud"
+					],
+					"path": [
+						"service1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "service 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"data\": {\n    \"time\": {\n      \"0\": \"2022-01-01 00:00:00\",\n      \"1\": \"2022-01-02 00:00:00\",\n      \"2\": \"2022-01-04 00:00:00\"\n    },\n    \"vol\": {\n      \"0\": 20,\n      \"1\": 40,\n      \"2\": 100\n    }\n  },\n  \"config\": {\n    \"time\": \"daily\",\n    \"interpolation\": \"linear\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fandogh-service-mhrzn1.fandogh.cloud/service2",
+					"protocol": "https",
+					"host": [
+						"fandogh-service-mhrzn1",
+						"fandogh",
+						"cloud"
+					],
+					"path": [
+						"service2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "service 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n  \"data\": {\n    \"id\":{\n        \"0\":0,\n        \"1\":1,\n        \"2\":2,\n        \"3\":3,\n        \"4\":4,\n        \"5\":5,\n        \"6\":6,\n        \"7\":7,\n        \"8\":8,\n        \"9\":9,\n        \"10\":10\n    },\n    \"feature\": {\n      \"0\": 200,\n      \"1\": 100,\n      \"2\": 200,\n      \"3\": 100,\n      \"4\": 200,\n      \"5\":100,\n      \"6\":200,\n      \"7\":100,\n      \"8\":1000,\n      \"9\":100,\n      \"10\":1000\n    }\n  },\n  \"config\": {\n      \"time_series\": false,\n      \"method\": \"IQR\",\n      \"feature\": \"feature\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fandogh-service-mhrzn1.fandogh.cloud/service3",
+					"protocol": "https",
+					"host": [
+						"fandogh-service-mhrzn1",
+						"fandogh",
+						"cloud"
+					],
+					"path": [
+						"service3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "service 4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"data\": {\n    \"id\": {\n      \"0\": 1,\n      \"1\": 2,\n      \"2\": 3,\n      \"3\": 4,\n      \"4\": 5,\n      \"5\": 6,\n      \"6\":7,\n      \"7\":8,\n      \"8\":9,\n      \"9\":10,\n      \"10\":11,\n      \"11\":12,\n      \"12\":13,\n      \"13\":14,\n      \"14\":15,\n      \"15\":16,\n      \"16\":17,\n      \"17\":18\n    },\n    \"feature1\": {\n      \"0\": 50,\n      \"1\": 51,\n      \"2\": 52,\n      \"3\": 53,\n      \"4\": 54,\n      \"5\": 150,\n      \"6\": 151,\n      \"7\":152,\n      \"8\": 153,\n      \"9\":154,\n      \"10\":155,\n      \"11\":156,\n      \"12\":157,\n      \"13\":158,\n      \"14\":159,\n      \"15\":160,\n      \"16\":55,\n      \"17\":160\n\n    },\n    \"feature2\":{\n      \"0\": 100,\n      \"1\": 101,\n      \"2\": 102,\n      \"3\": 103,\n      \"4\": 104,\n      \"5\": 200,\n      \"6\":201,\n      \"7\":202,\n      \"8\": 203,\n      \"9\": 204,\n      \"10\": 205,\n      \"11\": 206,\n      \"12\": 207,\n      \"13\": 208,\n      \"14\": 209,\n      \"15\": 210,\n      \"16\":105,\n      \"17\":211\n\n    },\n    \"class\": {\n      \"0\": 1,\n      \"1\": 1,\n      \"2\": 1,\n      \"3\": 1,\n      \"4\": 1,\n      \"5\": 0,\n      \"6\":0,\n      \"7\":0,\n      \"8\":0,\n      \"9\":0,\n      \"10\":0,\n      \"11\":0,\n      \"12\":0,\n      \"13\":0,\n      \"14\":0,\n      \"15\":0,\n      \"16\":1,\n      \"17\":1\n    }\n  },\n  \"config\": {\n    \"method\": \"SMOTE\",\n    \"class_name\": \"class\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fandogh-service-mhrzn1.fandogh.cloud/service4",
+					"protocol": "https",
+					"host": [
+						"fandogh-service-mhrzn1",
+						"fandogh",
+						"cloud"
+					],
+					"path": [
+						"service4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

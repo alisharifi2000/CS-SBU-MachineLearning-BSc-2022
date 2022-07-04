@@ -1,0 +1,399 @@
+{
+    "openapi":"3.0.0",
+    "info": {
+        "version": "0.1",
+        "title": "SBU-ML-Project3-Services"
+    },
+    "components": {
+        "schemas": {
+            "Interpolation (Service1)": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "0": {
+                                "type": "if miladi: Unix Epoch else: YEAR-MONTH-DAY-HOUR-MINUTE-SECOND-MICROSECOND"
+                            },
+                            "1": {
+                                "type": "if miladi: Unix Epoch else: YEAR-MONTH-DAY-HOUR-MINUTE-SECOND-MICROSECOND"
+                            },
+                            "2": {
+                                "type": "if miladi: Unix Epoch else: YEAR-MONTH-DAY-HOUR-MINUTE-SECOND-MICROSECOND"
+                            },
+                            "...": {
+                                "type":" "
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "type":{
+                                "type": "one of: miladi/shamsi",
+                                "required": true
+                            },
+                            "time":{
+                                "type": "one of: yearly/monthly/daily/hours/minutes/seconds",
+                                "required": true
+                            },
+                            "interpolation":{
+                                "type": "one of: polynomial/spline",
+                                "required": true
+                            },
+                            "interpolation_order":{
+                                "type": "either 1 or 2",
+                                "format": "integer",
+                                "required": false
+                            },
+                            "frequency":{
+                                "type": "positive integer",
+                                "required": false
+                            },
+                            "skip_holiday":{
+                                "type": "boolean",
+                                "required": false
+                            }
+                        }
+                    }
+                }
+            },
+            "InterpolationFromShamsiToMiladi (Service2)": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "0": {
+                                "type": "Unix Epoch",
+                                "format":"integer"
+                            },
+                            "1": {
+                                "type": "Unix Epoch",
+                                "format":"integer"
+                            },
+                            "2": {
+                                "type": "Unix Epoch",
+                                "format":"integer"
+                            },
+                            "...": {
+                                "type":" "
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "time":{
+                                "type": "one of: yearly/monthly/daily/hours/minutes/seconds",
+                                "required": true
+                            },
+                            "interpolation":{
+                                "type": "one of: polynomial/spline",
+                                "required": true
+                            },
+                            "interpolation_order":{
+                                "type": "either 1 or 2",
+                                "format": "integer",
+                                "required": false
+                            },
+                            "frequency":{
+                                "type": "positive integer",
+                                "required": false
+                            },
+                            "skip_holiday":{
+                                "type": "boolean",
+                                "required": false
+                            }
+                        }
+                    }
+                }
+            },
+            "Outlier Detection (Service3)": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "object",
+                                "properties":{
+                                    "0": {
+                                        "type": "any"
+                                    },
+                                    "1": {
+                                        "type": "any"
+                                    },
+                                    "2": {
+                                        "type": "any"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "feature": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "time_series":{
+                                "type": "should be false",
+                                "format":"boolean",
+                                "required": true
+                            },
+                            "z_score":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "threshold": {
+                                        "type": "integer",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "lof":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_neighbors": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "metric": {
+                                        "type": "any metric accepted by sklearn such as manhattan",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "isolation_forest":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_estimators": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "contamination": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "one_class_svm":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "kernel": {
+                                        "type": "one of: linear/rbf",
+                                        "required":false
+                                    },
+                                    "max_iter": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "tol": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    },
+                                    "nu": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            }  
+                        }
+                    }
+                }
+            },
+            "Outlier Detection For Time Series (Service3)": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "type": "object",
+                                    "properties": {
+                                    "0": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "1": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "2": {
+                                        "type": "Unix Epoch",
+                                        "format":"integer"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "vol": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "properties": {
+                            "time_series":{
+                                "type": "should be true",
+                                "format":"boolean",
+                                "required": true
+                            },
+                            "isolation_forest":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "n_estimators": {
+                                        "type": "integer",
+                                        "required":false
+                                    },
+                                    "contamination": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            },
+                            "dbscan":{
+                                "type": "object",
+                                "required": false,
+                                "properties": {
+                                    "metric": {
+                                        "type": "any metric accepted by sklearn such as manhattan",
+                                        "required":false
+                                    },
+                                    "min_samples": {
+                                        "type": "positive integer",
+                                        "required":false
+                                    },
+                                    "eps": {
+                                        "type": "float between 0 and 1",
+                                        "required":false
+                                    }
+                                }
+                            }  
+                        }
+                    }
+                }
+            },
+            "Imbalanced Data Management (Service4)": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "feature1": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "feature2": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "number"
+                                    },
+                                    "1": {
+                                        "type": "number"
+                                    },
+                                    "2": {
+                                        "type": "number"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            },
+                            "...": {
+                                "type":" "
+                            },
+                            "class": {
+                                "type": "object",
+                                "properties": {
+                                    "0": {
+                                        "type": "0 or 1"
+                                    },
+                                    "1": {
+                                        "type": "0 or 1"
+                                    },
+                                    "2": {
+                                        "type": "0 or 1"
+                                    },
+                                    "...": {
+                                        "type":" "
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "method":{
+                                "type": "one of: oversampling/undersampling/SMOTE",
+                                "required": true
+                            },
+                            "major_class":{
+                                "type": "0 or 1",
+                                "required": false
+                            },
+                            "minor_class":{
+                                "type": "0 or 1",
+                                "required": false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

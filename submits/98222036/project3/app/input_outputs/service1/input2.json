@@ -1,0 +1,21 @@
+{
+  "data": {
+    "time": {
+      "0": "1401-4-6-18-5-0-0",
+      "1": "1401-4-6-18-20-0-0",
+      "2": "1401-4-6-18-50-0-0"
+    },
+    "vol": {
+      "0": 20,
+      "1": 40,
+      "2": 100
+    }
+  },
+  "config": {
+    "type": "shamsi",
+    "time": "minutes",
+    "frequency": 5,
+    "interpolation": "spline",
+    "interpolation_order": 2
+  }
+}

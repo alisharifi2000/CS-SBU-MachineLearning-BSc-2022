@@ -1,0 +1,304 @@
+openapi: 3.0.1
+info:
+  title: ML Final Project (Sara Rezaei)
+  description: Machine Learning Final Project. Implemention of four services using Flask and Fandogh Cloud.
+  version: '1.1'
+  contact:
+    email: sararezaei060@gmail.com
+servers:
+- url: "https://fandogh-service-sraarz.fandogh.cloud"
+tags:
+  - name: 1st Service
+    description: Interpolation
+  - name: 2nd Service 
+    description: Interpolation
+  - name: 3rd Service
+    description: Outlier Detection
+  - name: 4th Service
+    description: Imbalance Data Management
+paths:
+  "/":
+    get:
+      summary: Check for API connection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "API is active"
+            
+  "/service1":
+    post:
+      tags:
+      - 1st Service
+      summary: Interpolate daily and monthly Jalali and Gregorian date
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/service1-request"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/service1-response"
+  "/service2":
+    post:
+      tags:
+      - 2nd Service
+      summary: Interpolate Gregorian date and convert to Jalali date.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/service2-request"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/service2-response"
+  "/service3":
+    post:
+      tags:
+      - 3rd Service
+      summary: Detect outliers data in time-series and normal datasets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/service3-request"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/service3-response"
+  "/service4":
+    post:
+      tags:
+      - 4th Service
+      summary: handle imbalanced dataset using oversampling and undersampling methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/service4-request"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                "$ref": "#/components/schemas/service4-response"
+          
+components:
+  schemas:
+    service1-request:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            time:
+              type: array
+              items:
+                type: integer
+                description: unix format ms
+                example: 1577836800000
+            vol:
+              type: array
+              items:
+                type: integer
+                example: 20
+        config:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - miladi
+              - shamsi
+            time:
+              type: string
+              enum:
+              - linear
+            interpolation:
+              type: string
+              enum:
+              - linear
+    service1-response:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            time:
+              type: array
+              items: 
+                type: integer
+                description: unix format ms
+                example: 1577836800000
+            vol:
+              type: array
+              items:
+                type: integer
+                example: 20
+    service2-request:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            time:
+              type: array
+              items: 
+                type: integer
+                description: unix format ms
+                example: 1577836800000
+            vol:
+              type: array
+              items:
+                type: integer
+                example: 20
+        config:
+          type: object
+          properties:
+            time:
+              type: string
+              enum:
+              - daily
+              - monthly
+            interpolation:
+              type: string
+              enum:
+              - linear
+            skip_holiday:
+              type: boolean
+              example: false
+    service2-response:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            time:
+              type: array
+              items: 
+                type: string
+                example: "1400-7-27"
+            vol:
+              type: array
+              items:
+                type: integer
+                example: 20
+    service3-request:
+      type: object
+      properties:
+        data:
+          properties:
+            id:
+              type: array
+              items:
+                type: integer
+                example: 1
+            feature:
+              type: array
+              items: 
+                type: integer 
+                example: 30
+        config:
+          properties:
+            time_series:
+              type: boolean
+              example: false
+    service3-response:
+      type: object
+      properties:
+        data:
+          properties:
+            id:
+              type: array
+              items:
+                type: integer
+                example: 1
+            method1:
+              type: array
+              items: 
+                type: boolean 
+                example: false
+            method2:
+              type: array
+              items: 
+                type: boolean 
+                example: false
+    service4-request:
+      type: object
+      properties:
+        data:
+          properties:
+            id:
+              type: array
+              items:
+                type: integer
+                example: 1
+            feature1:
+              type: array
+              items: 
+                type: integer 
+                example: 30
+            class:
+              type: array
+              items: 
+                type: integer
+                enum:
+                  - 0
+                  - 1
+        config:
+          properties:
+            major_class:
+              type: integer
+              example: 1
+            minor_class:
+              type: integer
+              example: 0
+            method:
+              type: string
+              enum:
+                - UnderSampling
+                - OverSampling
+                - SMOTE
+                - NearMiss
+    service4-response:
+      type: object
+      properties:
+        data:
+          properties:
+            id:
+              type: array
+              items:
+                type: integer
+                example: 1
+            feature1:
+              type: array
+              items: 
+                type: integer 
+                example: 30
+            class:
+              type: array
+              items: 
+                type: integer
+                enum:
+                  - 0
+                  - 1
+    
